@@ -9,6 +9,6 @@ public class tableTest {
 
     @RequestMapping("/test")
     public String test(){
-        return "page2";
+        return "success";
     }
 }
