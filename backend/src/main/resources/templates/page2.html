@@ -1,0 +1,37 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Title1</title>
+    <link rel="stylesheet" href="/layui/css/layui.css" media="all">
+</head>
+<body>
+<table class="layui-hide" id="test"></table>
+
+<script src="/layui/layui.js"></script>
+<script>
+    layui.use(['table'], function(){
+        var table = layui.table;
+
+        table.render({
+            elem: '#test'
+            ,url: '/json/mydata.json'
+            ,cols: [
+                [
+                    {field:'id', width:80, title: 'ID', sort: true}
+                    ,{field:'username', width:80, title: '用户名'}
+                    ,{field:'sex', width:80, title: '性别', sort: true}
+                    ,{field:'city', width:80, title: '城市'}
+                    ,{field:'sign', title: '签名', width: '30%', minWidth: 100} //minWidth：局部定义当前单元格的最小宽度，layui 2.2.1 新增
+                    ,{field:'experience', title: '积分', sort: true}
+                    ,{field:'score', title: '评分', sort: true}
+                    ,{field:'classify', title: '职业'}
+                    ,{field:'wealth', width:137, title: '财富', sort: true}
+                ]
+            ]
+        });
+    });
+    //{"id":10000,"username":"user-0","sex":"女","city":"城市-0","sign":"签名-0","experience":255,"logins":24,"wealth":82830700,"classify":"作家","score":57}
+</script>
+</body>
+</html>
