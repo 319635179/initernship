@@ -11,13 +11,13 @@ import java.util.Date;
 @Data
 @AllArgsConstructor
 @NoArgsConstructor
-public class dept {
+public class Dept {
     @TableId(type = IdType.AUTO)
-    private int deptId;
-    private String  deptName;
+    private int dept_id;
+    private String  dept_name;
     private char status;
-    private char deleteFlag;
-    private String  createBy;
-    private String  updateBy;
-    private Date updateTime;
+    private char delete_flag;
+    private String  create_by;
+    private String  update_by;
+    private Date update_time;
 }
