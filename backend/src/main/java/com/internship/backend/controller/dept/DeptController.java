@@ -1,6 +1,5 @@
 package com.internship.backend.controller.dept;
 
-import com.internship.backend.mapper.DeptMapper;
 import com.internship.backend.pojo.table.DeptTable;
 import com.internship.backend.service.dept.DeptService;
 import org.springframework.beans.factory.annotation.Autowired;
