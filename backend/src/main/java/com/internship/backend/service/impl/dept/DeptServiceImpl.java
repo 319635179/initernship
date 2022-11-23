@@ -11,6 +11,11 @@ import java.util.ArrayList;
 import java.util.Date;
 import java.util.List;
 
+/**
+*
+* @author: 汪子涵
+* @date: 2022/11/23
+*/
 @Service
 public class DeptServiceImpl implements DeptService {
 
@@ -19,10 +24,9 @@ public class DeptServiceImpl implements DeptService {
     @Override
     public List<Dept> getDept() {
         QueryWrapper<Dept> queryWrapper = new QueryWrapper<Dept>();
-        queryWrapper.eq("dept_id", 1);
-        Dept dept = deptMapper.selectOne(queryWrapper);
+        queryWrapper.select("*");
         List<Dept> list = new ArrayList<>();
-        list.add(dept);
+        list = deptMapper.selectList(queryWrapper);
         return list;
     }
 }

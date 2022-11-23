@@ -8,16 +8,21 @@ import lombok.NoArgsConstructor;
 
 import java.util.Date;
 
+/**
+*
+* @author: 汪子涵
+* @date: 2022/11/23
+*/
 @Data
 @AllArgsConstructor
 @NoArgsConstructor
 public class Dept {
     @TableId(type = IdType.AUTO)
-    private int dept_id;
-    private String  dept_name;
+    private Integer id;
+    private String  deptName;
     private char status;
-    private char delete_flag;
-    private String  create_by;
-    private String  update_by;
-    private Date update_time;
+    private char delFlag;
+    private String  createWith;
+    private String  updateWith;
+    private Date updateDate;
 }
