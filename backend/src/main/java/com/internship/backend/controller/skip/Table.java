@@ -10,10 +10,15 @@ import org.springframework.web.bind.annotation.RequestMapping;
 */
 @Controller
 @RequestMapping("/table")
-public class tableTest {
+public class Table {
 
-    @RequestMapping("/test")
-    public String test(){
-        return "success";
+    @RequestMapping("/dept")
+    public String dept(){
+        return "dept";
+    }
+
+    @RequestMapping("/role")
+    public String role(){
+        return "role";
     }
 }

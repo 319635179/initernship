@@ -1,0 +1,35 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <title>Title1</title>
+  <link rel="stylesheet" href="/layui/css/layui.css" media="all">
+</head>
+<body>
+<table class="layui-hide" id="test"></table>
+
+<script src="/layui/layui.js"></script>
+<script>
+  layui.use(['table'], function(){
+    var table = layui.table;
+
+    table.render({
+      elem: '#test'
+      ,url: '/role/getrole'
+      ,cols: [
+        [
+          {field:'id', width:80, title: 'ID', sort: true}
+          ,{field:'roleName', width:130, title: '部门'}
+          ,{field:'status', width:80, title: '状态', sort: true}
+          ,{field:'createBy', width:100, title: '创建人'}
+          ,{field:'updateBy', width:100, title: '更新人', sort: true}
+          ,{field:'createTime', width:180, title: '创建时间', sort: true}
+          ,{field:'updateTime', width:180, title: '更新时间', sort: true}
+        ]
+      ]
+    });
+  });
+  //{"id":10000,"username":"user-0","sex":"女","city":"城市-0","sign":"签名-0","experience":255,"logins":24,"wealth":82830700,"classify":"作家","score":57}
+</script>
+</body>
+</html>

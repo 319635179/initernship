@@ -24,7 +24,7 @@ public class DeptServiceImpl implements DeptService {
     @Override
     public List<Dept> getDept() {
         QueryWrapper<Dept> queryWrapper = new QueryWrapper<Dept>();
-        queryWrapper.select("*");
+        queryWrapper.eq("del_flag", 0);
         List<Dept> list = new ArrayList<>();
         list = deptMapper.selectList(queryWrapper);
         return list;
