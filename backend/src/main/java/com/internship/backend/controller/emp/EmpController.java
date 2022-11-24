@@ -19,6 +19,7 @@ public class EmpController {
 
     @Autowired
     private EmpService empService;
+    @Autowired
     private HttpSession session;
 
     @PostMapping("/emp/getlogin")
@@ -28,9 +29,8 @@ public class EmpController {
             return new LoginResult(2, "用户名或密码错误", 0, null);
         }else if(emp.getStatus()=='1'){
             return new LoginResult(1, "该员工已离职", 0, null);
-        }else {
-            session.setAttribute("loginEmp", emp);
-            return new LoginResult(0, "success", 1, emp);
         }
+        session.setAttribute("loginEmp", emp);
+        return new LoginResult(0, "success", 1, emp);
     }
 }
