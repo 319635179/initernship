@@ -64,12 +64,29 @@
     layui.use(["form","layer"],function(){
         var form = layui.form;
         var layer = layui.layer;
+        var $ = layui.$;
         //监听表单的提交按钮，当提交按钮触发提交的时候，执行函数
         form.on("submit(login)",function(data){
             //1.登陆校验
-
+            $.ajax({
+                url: "/emp/getlogin",
+                type: "Post",
+                data: {
+                    username:data.field.username,
+                    password:data.field.password
+                },
+                success:(resp)=>{
+                    if(resp.code===0) window.location.href="/index/home";
+                    else {
+                        layer.msg(resp.msg, {icon:5});
+                    }
+                },
+                error(resp){
+                    console.log(resp);
+                }
+            })
             //2.如果登陆成功，跳转后台管理页面
-            window.location.href="/index/home";
+            // window.location.href="/index/home";
         })
     })
 

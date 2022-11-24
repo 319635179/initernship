@@ -11,7 +11,6 @@ import org.springframework.web.bind.annotation.RequestMapping;
 @Controller
 @RequestMapping("/table")
 public class Table {
-
     @RequestMapping("/dept")
     public String dept(){
         return "dept";
