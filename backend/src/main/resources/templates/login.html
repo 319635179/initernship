@@ -69,7 +69,7 @@
         form.on("submit(login)",function(data){
             //1.登陆校验
             $.ajax({
-                url: "/emp/getlogin",
+                url: "/get/getlogin",
                 type: "Post",
                 data: {
                     username:data.field.username,

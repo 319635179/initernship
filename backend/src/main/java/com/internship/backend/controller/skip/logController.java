@@ -3,6 +3,8 @@ package com.internship.backend.controller.skip;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.RequestMapping;
 
+import javax.servlet.http.HttpSession;
+
 /**
 *
 * @author: 汪子涵
@@ -10,10 +12,16 @@ import org.springframework.web.bind.annotation.RequestMapping;
 */
 @Controller
 @RequestMapping("/request")
-public class loginController {
+public class logController {
 
     @RequestMapping("/login")
     public String login(){
+        return "login";
+    }
+
+    @RequestMapping("/logout")
+    public String logout(HttpSession session){
+        session.invalidate();
         return "login";
     }
 }

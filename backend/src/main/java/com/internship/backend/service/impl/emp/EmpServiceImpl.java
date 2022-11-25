@@ -1,4 +1,4 @@
-package com.internship.backend.service.impl;
+package com.internship.backend.service.impl.emp;
 
 import com.baomidou.mybatisplus.core.conditions.query.QueryWrapper;
 import com.internship.backend.mapper.EmpMapper;

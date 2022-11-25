@@ -11,4 +11,8 @@ import java.util.List;
 */
 public interface DeptService {
     public List<Dept> getDept();
+
+    public String addDept(Dept dept);
+
+    public String deleteDept(Integer id);
 }

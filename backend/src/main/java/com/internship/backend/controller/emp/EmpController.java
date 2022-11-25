@@ -22,7 +22,7 @@ public class EmpController {
     @Autowired
     private HttpSession session;
 
-    @PostMapping("/emp/getlogin")
+    @PostMapping("/get/getlogin")
     public LoginResult getlogin(String username,String password) {
         Emp emp = empService.getLoginEmp(username);
         if(emp==null || emp.getIsDel()=='1' || !emp.getPassword().equals(password)) {

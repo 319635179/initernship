@@ -28,4 +28,28 @@ public class DeptServiceImpl implements DeptService {
         list = deptMapper.selectList(queryWrapper);
         return list;
     }
+
+    @Override
+    public String addDept(Dept dept) {
+        QueryWrapper<Dept> queryWrapper = new QueryWrapper<>();
+        queryWrapper.eq("dept_name", dept.getDeptName());
+        if(deptMapper.selectOne(queryWrapper)==null){
+            deptMapper.insert(dept);
+            return "success";
+        }
+        return "error";
+    }
+
+    @Override
+    public String deleteDept(Integer id) {
+        QueryWrapper<Dept> queryWrapper = new QueryWrapper<>();
+        queryWrapper.eq("id", id);
+        if(deptMapper.selectOne(queryWrapper)!=null){
+            Dept dept = deptMapper.selectOne(queryWrapper);
+            dept.setDelFlag('1');
+            deptMapper.updateById(dept);
+            return "success";
+        }
+        return "error";
+    }
 }

@@ -3,7 +3,7 @@ package com.internship.backend;
 import com.baomidou.mybatisplus.core.conditions.query.QueryWrapper;
 import com.internship.backend.mapper.DeptMapper;
 import com.internship.backend.pojo.Dept;
-import com.internship.backend.service.impl.EmpServiceImpl;
+import com.internship.backend.service.impl.emp.EmpServiceImpl;
 import org.junit.jupiter.api.Test;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.test.context.SpringBootTest;
