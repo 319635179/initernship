@@ -20,15 +20,23 @@ public class DeptController {
     @Autowired
     private DeptService deptService;
 
+    /**
+     *
+     * @return get all dept
+     */
     @GetMapping("/get/getdept")
     public DeptTable getdept(){
         DeptTable deptTable = new DeptTable(0, deptService.getDept());
         return deptTable;
     }
 
+    /**
+     *
+     * @param deptName
+     * @return is add dept success
+     */
     @PostMapping("/add/adddpet")
     public String adddept(String deptName){
-        System.out.println(deptName);
         Dept dept = new Dept();
         dept.setDeptName(deptName);
         dept.setCreateWith("wzh");
@@ -39,6 +47,11 @@ public class DeptController {
         return deptService.addDept(dept);
     }
 
+    /**
+     *
+     * @param id
+     * @return is delete dept success
+     */
     @PostMapping("/delete/deletedept")
     public String deletedept(Integer id){
         return deptService.deleteDept(id);
