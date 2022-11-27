@@ -24,6 +24,5 @@ public class Dept {
     private char delFlag;
     private String  createWith;
     private String  updateWith;
-//    @JsonFormat(shape =JsonFormat.Shape.STRING,pattern ="yyyy-MM-dd HH:mm:ss",timezone ="GMT+8")
     private Date updateDate;
 }
