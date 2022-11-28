@@ -17,5 +17,6 @@ import java.util.List;
 @NoArgsConstructor
 public class DeptTable {
     private Integer code;
+    private Integer count;
     private List<Dept> data;
 }

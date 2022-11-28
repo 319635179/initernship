@@ -23,6 +23,7 @@ public class Dept {
     private char status;
     private char delFlag;
     private String  createWith;
+    private Date createDate;
     private String  updateWith;
     private Date updateDate;
 }

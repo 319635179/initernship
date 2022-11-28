@@ -3,6 +3,7 @@ package com.internship.backend;
 import com.baomidou.mybatisplus.core.conditions.query.QueryWrapper;
 import com.internship.backend.mapper.DeptMapper;
 import com.internship.backend.pojo.Dept;
+import com.internship.backend.service.dept.DeptService;
 import com.internship.backend.service.impl.emp.EmpServiceImpl;
 import org.junit.jupiter.api.Test;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -13,6 +14,8 @@ class BackendApplicationTests {
 
     @Autowired
     DeptMapper deptMapper;
+    @Autowired
+    DeptService deptService;
     @Test
     void contextLoads() {
         QueryWrapper<Dept> queryWrapper = new QueryWrapper<Dept>();
@@ -25,8 +28,7 @@ class BackendApplicationTests {
     EmpServiceImpl empService;
     @Test
     void testEmpServiceImpl(){
-        System.out.println(empService.getAllEmp());
-//        System.out.println(empService.getLoginEmp("wzh"));
+//        System.out.println(deptService.getDept());
     }
 
 }

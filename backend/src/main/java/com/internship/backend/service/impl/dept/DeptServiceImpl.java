@@ -20,6 +20,7 @@ public class DeptServiceImpl implements DeptService {
 
     @Autowired
     DeptMapper deptMapper;
+
     @Override
     public List<Dept> getDept() {
         QueryWrapper<Dept> queryWrapper = new QueryWrapper<Dept>();
@@ -27,6 +28,22 @@ public class DeptServiceImpl implements DeptService {
         List<Dept> list = new ArrayList<>();
         list = deptMapper.selectList(queryWrapper);
         return list;
+    }
+
+    @Override
+    public List<Dept> getDept(String searchName) {
+        QueryWrapper<Dept> queryWrapper = new QueryWrapper<Dept>();
+        queryWrapper.eq("del_flag", 0);
+        List<Dept> list = new ArrayList<>(), listResult = new ArrayList<>();
+        list = deptMapper.selectList(queryWrapper);
+        for(Dept dept:list){
+            if(dept.getDeptName().indexOf(searchName) != -1 ||
+                    dept.getCreateWith().indexOf(searchName) != -1 ||
+                    dept.getUpdateWith().indexOf(searchName) != -1){
+                listResult.add(dept);
+            }
+        }
+        return listResult;
     }
 
     @Override
@@ -48,6 +65,23 @@ public class DeptServiceImpl implements DeptService {
             Dept dept = deptMapper.selectOne(queryWrapper);
             dept.setDelFlag('1');
             deptMapper.updateById(dept);
+            return "success";
+        }
+        return "error";
+    }
+
+    @Override
+    public String editDept(Dept dept) {
+        QueryWrapper<Dept> queryWrapper1 = new QueryWrapper<>(), queryWrapper2 = new QueryWrapper<>();
+        queryWrapper1.eq("id", dept.getId());
+        queryWrapper2.eq("dept_name", dept.getDeptName());
+        if(deptMapper.selectOne(queryWrapper1)!=null && deptMapper.selectOne(queryWrapper2) == null){
+            Dept nowDept = deptMapper.selectOne(queryWrapper1);
+            nowDept.setDeptName(dept.getDeptName());
+            nowDept.setStatus(dept.getStatus());
+            nowDept.setUpdateDate(dept.getUpdateDate());
+            nowDept.setUpdateWith(dept.getUpdateWith());
+            deptMapper.updateById(nowDept);
             return "success";
         }
         return "error";
