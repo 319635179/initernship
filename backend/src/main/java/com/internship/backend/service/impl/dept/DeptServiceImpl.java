@@ -25,9 +25,7 @@ public class DeptServiceImpl implements DeptService {
     public List<Dept> getDept() {
         QueryWrapper<Dept> queryWrapper = new QueryWrapper<Dept>();
         queryWrapper.eq("del_flag", 0);
-        List<Dept> list = new ArrayList<>();
-        list = deptMapper.selectList(queryWrapper);
-        return list;
+        return deptMapper.selectList(queryWrapper);
     }
 
     @Override
@@ -37,9 +35,9 @@ public class DeptServiceImpl implements DeptService {
         List<Dept> list = new ArrayList<>(), listResult = new ArrayList<>();
         list = deptMapper.selectList(queryWrapper);
         for(Dept dept:list){
-            if(dept.getDeptName().indexOf(searchName) != -1 ||
-                    dept.getCreateWith().indexOf(searchName) != -1 ||
-                    dept.getUpdateWith().indexOf(searchName) != -1){
+            if(dept.getDeptName().contains(searchName) ||
+                    dept.getCreateWith().contains(searchName) ||
+                    dept.getUpdateWith().contains(searchName)){
                 listResult.add(dept);
             }
         }
@@ -85,5 +83,12 @@ public class DeptServiceImpl implements DeptService {
             return "success";
         }
         return "error";
+    }
+
+    @Override
+    public String getDeptNameById(Integer id) {
+        QueryWrapper<Dept> queryWrapper = new QueryWrapper<>();
+        queryWrapper.eq("id", id);
+        return deptMapper.selectOne(queryWrapper).getDeptName();
     }
 }

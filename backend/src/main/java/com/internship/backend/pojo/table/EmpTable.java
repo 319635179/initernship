@@ -1,22 +1,17 @@
 package com.internship.backend.pojo.table;
 
-import com.internship.backend.pojo.Role;
+import com.internship.backend.pojo.Emp;
 import lombok.AllArgsConstructor;
 import lombok.Data;
 import lombok.NoArgsConstructor;
 
 import java.util.List;
 
-/**
-*
-* @author: 汪子涵
-* @date: 2022/11/23
-*/
 @Data
 @AllArgsConstructor
 @NoArgsConstructor
-public class RoleTable {
+public class EmpTable {
     private Integer code;
     private Integer count;
-    private List<Role> data;
+    private List<Emp> data;
 }

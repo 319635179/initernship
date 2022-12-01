@@ -34,19 +34,16 @@ public class DeptController {
      */
     @GetMapping("/get/getdept")
     public DeptTable getdept(Integer page, Integer limit, String searchName){
-        System.out.println(searchName);
         if(searchName==null){
-            DeptTable deptTable = new DeptTable(0,
+            return new DeptTable(0,
                     deptService.getDept().toArray().length,
                     deptService.getDept().subList((page - 1) * limit,
                             Math.min((page * limit),deptService.getDept().toArray().length)));
-            return deptTable;
         } else {
-            DeptTable deptTable = new DeptTable(0,
+            return new DeptTable(0,
                     deptService.getDept(searchName).toArray().length,
                     deptService.getDept(searchName).subList((page - 1) * limit,
                             Math.min((page * limit), deptService.getDept(searchName).toArray().length)));
-            return deptTable;
         }
     }
 
@@ -97,11 +94,16 @@ public class DeptController {
         dept.setDeptName(deptName);
         dept.setUpdateDate(new Date());
         dept.setUpdateWith(emp.getEmpName());
-        if(status=="可用") {
+        if(status.equals("可用")) {
             dept.setStatus('0');
         }else{
             dept.setStatus('1');
         }
         return deptService.editDept(dept);
+    }
+
+    @PostMapping("/get/deptname")
+    public String getRoleNameById(Integer id){
+        return deptService.getDeptNameById(id);
     }
 }

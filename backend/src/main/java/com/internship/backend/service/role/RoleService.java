@@ -11,4 +11,14 @@ import java.util.List;
 */
 public interface RoleService {
     public List<Role> getRole();
+
+    public List<Role> getRole(String searchName);
+
+    public String addRole(Role role);
+
+    public String deleteRole(Integer id);
+
+    public String editRole(Role role);
+
+    public String getRoleNameById(Integer id);
 }

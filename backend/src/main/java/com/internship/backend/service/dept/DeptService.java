@@ -18,4 +18,6 @@ public interface DeptService {
     public String deleteDept(Integer id);
 
     public String editDept(Dept dept);
+
+    public String getDeptNameById(Integer id);
 }

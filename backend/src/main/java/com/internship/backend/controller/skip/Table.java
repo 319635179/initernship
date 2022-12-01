@@ -20,4 +20,9 @@ public class Table {
     public String role(){
         return "role";
     }
+
+    @RequestMapping("/emp")
+    public String emp(){
+        return "emp";
+    }
 }

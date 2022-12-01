@@ -198,10 +198,8 @@
             })
         })
         form.on("submit(deptEditForm)", function (obj){
-            $.ajax({
-                url: '/get/getdeptid',
-                type: 'post',
-            })
+
+            console.log(obj.field, nowId)
             $.ajax({
                 url: '/edit/editdept',
                 type: 'Post',
