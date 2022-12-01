@@ -7,7 +7,9 @@ import com.internship.backend.service.emp.EmpService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
+import javax.servlet.http.HttpSession;
 import java.util.ArrayList;
+import java.util.Date;
 import java.util.List;
 
 /**
@@ -19,18 +21,20 @@ import java.util.List;
 public class EmpServiceImpl implements EmpService {
     @Autowired
     private EmpMapper empMapper;
+    @Autowired
+    private HttpSession session;
     @Override
     public List<Emp> getEmp() {
         QueryWrapper<Emp> queryWrapper = new QueryWrapper<>();
-        queryWrapper.select("*");
+        queryWrapper.eq("is_del", 0);
         List<Emp> list = empMapper.selectList(queryWrapper);
         return empMapper.selectList(queryWrapper);
     }
 
     @Override
     public List<Emp> getEmp(String searchName) {
-        QueryWrapper<Emp> queryWrapper = new QueryWrapper<Emp>();
-        queryWrapper.eq("del_flag", 0);
+        QueryWrapper<Emp> queryWrapper = new QueryWrapper<>();
+        queryWrapper.eq("is_del", 0);
         List<Emp> list = empMapper.selectList(queryWrapper), listResult = new ArrayList<>();
         for(Emp r:list){
             if(r.getEmpName().contains(searchName) ||
@@ -60,10 +64,13 @@ public class EmpServiceImpl implements EmpService {
     @Override
     public String deleteEmp(Integer id) {
         QueryWrapper<Emp> queryWrapper = new QueryWrapper<>();
+        Emp e = (Emp) session.getAttribute("loginEmp");
         queryWrapper.eq("id", id);
         if(empMapper.selectOne(queryWrapper)!=null){
             Emp emp = empMapper.selectOne(queryWrapper);
             emp.setIsDel('1');
+            emp.setUpdateTime(new Date());
+            emp.setUpdateBy(e.getEmpName());
             empMapper.updateById(emp);
             return "success";
         }

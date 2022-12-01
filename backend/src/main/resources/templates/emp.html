@@ -43,9 +43,9 @@
 <div class="empform" id="empform" style="display: none">
   <form class="layui-form" action="">
     <div class="layui-inline">
-      <label class="layui-form-label">部门名称</label>
+      <label class="layui-form-label">员工名称</label>
       <div class="layui-input-block">
-        <input type="text" name="empName" lay-verify="empName" autocomplete="off" placeholder="请输入部门名称" class="layui-input">
+        <input type="text" name="empName" lay-verify="empName" autocomplete="off" placeholder="请输入员工名称" class="layui-input">
       </div>
     </div>
     <div class="layui-form-item">
@@ -68,7 +68,12 @@
         <input type="text" name="tel" lay-verify="tel" autocomplete="off" placeholder="请输入联系方式" class="layui-input">
       </div>
     </div>
-
+    <div class="layui-inline">
+      <label class="layui-form-label">生日</label>
+      <div class="layui-input-inline">
+        <input type="text" name="date" id="date" lay-verify="date" placeholder="yyyy-MM-dd" autocomplete="off" class="layui-input">
+      </div>
+    </div>
     <div class="layui-inline">
       <label class="layui-form-label">邮箱</label>
       <div class="layui-input-block">
@@ -99,9 +104,9 @@
 <div class="editemp" id="editemp" style="display: none">
   <form class="layui-form" action="">
     <div class="layui-inline">
-      <label class="layui-form-label">部门名称</label>
+      <label class="layui-form-label">员工名</label>
       <div class="layui-input-block">
-        <input type="text" name="empName" lay-verify="empName" autocomplete="off" placeholder="请输入部门名称" class="layui-input">
+        <input type="text" name="empName" lay-verify="empName" autocomplete="off" placeholder="请输入员工名" class="layui-input">
       </div>
     </div>
     <div class="layui-form-item">
@@ -135,9 +140,12 @@
 <script src="/layui/layui.js"></script>
 <script>
   layui.use(['form', 'layedit', 'laydate', 'table'], function () {
-    var table = layui.table, form = layui.form;
+    var table = layui.table, form = layui.form, laydate = layui.laydate;
     var $ = layui.$;
     let roleName = [];
+    laydate.render({
+      elem: '#date'
+    });
     $.ajax({
       url: '/get/getrole?limit=999&page=1',
       type: 'get',
@@ -153,10 +161,8 @@
       type: 'get',
       success: (resp) =>{
         for(let i of resp.data){
-          console.log(i);
           deptName[i.id] = i.deptName
         }
-        console.log(deptName)
       }
     })
     table.render({
@@ -270,7 +276,6 @@
       }
     });
     form.on("submit(search)", function (obj) {
-      console.log(obj);
       table.reload("emp", {
         where: {
           searchName: obj.field.searchName
@@ -281,8 +286,6 @@
       })
     })
     form.on("submit(empEditForm)", function (obj) {
-
-      console.log(obj.field, nowId)
       $.ajax({
         url: '/edit/editemp',
         type: 'Post',
@@ -300,7 +303,7 @@
       })
     })
     form.on("submit(empAddForm)", function (obj) {
-      console.log(obj.field);
+      const day = new Date(obj.field.date)
       $.ajax({
         url: '/add/addemp',
         type: 'Post',
@@ -308,13 +311,13 @@
           empName: obj.field.empName,
           sex: obj.field.sex,
           status: obj.field.status,
+          birthday: day,
           tel: obj.field.tel,
           email: obj.field.email,
           roleName: obj.field.roleName,
           deptName: obj.field.deptName
         },
         success: (resp) => {
-          console.log('success ', resp);
           setTimeout(() => {
             table.reload("emp");
           }, 200)

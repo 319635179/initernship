@@ -80,7 +80,7 @@ public class EmpController {
      * @return is added emp success
      */
     @PostMapping("/add/addemp")
-    public String addemp(String empName, char sex, char status, String tel,
+    public String addemp(String empName, char sex, char status, String tel, Date birthday,
                          String email, String roleName, String deptName){
         Emp emp = (Emp) session.getAttribute("loginEmp");
         Emp e = new Emp();
@@ -88,6 +88,7 @@ public class EmpController {
         e.setSex(sex);
         e.setStatus(status);
         e.setTel(tel);
+        e.setBirthday(birthday);
         e.setEmail(email);
         e.setCreateBy(emp.getEmpName());
         e.setCreateTime(new Date());
