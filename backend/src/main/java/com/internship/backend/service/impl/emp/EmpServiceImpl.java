@@ -82,13 +82,16 @@ public class EmpServiceImpl implements EmpService {
         QueryWrapper<Emp> queryWrapper1 = new QueryWrapper<>(), queryWrapper2 = new QueryWrapper<>();
         queryWrapper1.eq("id", emp.getId());
         queryWrapper2.eq("emp_name", emp.getEmpName());
-        System.out.println(emp);
         if(empMapper.selectOne(queryWrapper1)!=null && empMapper.selectOne(queryWrapper2) == null){
             Emp nowEmp = empMapper.selectOne(queryWrapper1);
             nowEmp.setEmpName(emp.getEmpName());
             nowEmp.setStatus(emp.getStatus());
             nowEmp.setUpdateTime(emp.getUpdateTime());
             nowEmp.setUpdateBy(emp.getUpdateBy());
+            nowEmp.setSex(emp.getSex());
+            nowEmp.setBirthday(emp.getBirthday());
+            nowEmp.setTel(emp.getTel());
+            nowEmp.setEmail(emp.getEmail());
             empMapper.updateById(nowEmp);
             return "success";
         }

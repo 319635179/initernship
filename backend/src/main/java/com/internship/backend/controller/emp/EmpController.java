@@ -99,7 +99,6 @@ public class EmpController {
         Integer deptId = deptMapper.selectOne(new QueryWrapper<Dept>().eq("dept_name", deptName)).getId();
         e.setRoleId(roleId);
         e.setDeptId(deptId);
-        System.out.println(e);
         return empService.addEmp(e);
     }
 
@@ -114,18 +113,19 @@ public class EmpController {
     }
 
     @PostMapping("/edit/editemp")
-    public String editemp(Integer id, String empName, String status){
+    public String editemp(Integer id, String empName, char sex, char status, String tel, Date birthday,
+                          String email, String roleName, String deptName){
         Emp emp = (Emp) session.getAttribute("loginEmp");
         Emp e = new Emp();
         e.setId(id);
         e.setEmpName(empName);
         e.setUpdateTime(new Date());
-        e.setUpdateBy(e.getEmpName());
-        if(status.equals("可用")) {
-            e.setStatus('0');
-        }else{
-            e.setStatus('1');
-        }
+        e.setUpdateBy(emp.getEmpName());
+        e.setStatus(status);
+        e.setSex(sex);
+        e.setTel(tel);
+        e.setBirthday(birthday);
+        e.setEmail(email);
         return empService.editEmp(e);
     }
 }
