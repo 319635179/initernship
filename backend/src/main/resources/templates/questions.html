@@ -1,0 +1,46 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.thymeleaf.com">
+<head>
+    <meta charset="UTF-8">
+    <title>Title</title>
+    <!--引入layui css文件-->
+    <link rel="stylesheet" href="/layui/css/layui.css">
+</head>
+<body>
+<blockquote class="layui-elem-quote">FPA问题列表</blockquote>
+
+<!--使用thymeleaf渲染数据
+<div th:text="${questionList}"></div>
+-->
+<!--折叠面板-->
+<div class="layui-collapse">
+    <!--定义thymeleaf代码块，实现循环效果。 questionList 是目标集合(数组), q表示遍历到的当前元素-->
+    <th:block th:each=" q : ${questionList}">
+        <div class="layui-colla-item">
+            <h2 class="layui-colla-title" th:text="${q.questionNum}+'、'+${q.question}"></h2>
+            <div class="layui-colla-content layui-show">
+                <div style="display: flex">
+                    A、<p th:text="${q.ansA}"></p>
+                </div>
+                <div style="display: flex">
+                    B、<p th:text="${q.ansB}"></p>
+                </div>
+                <div style="display: flex">
+                    C、<p th:text="${q.ansC}"></p>
+                </div>
+                <div style="display: flex">
+                    D、<p th:text="${q.ansD}"></p>
+                </div>
+            </div>
+        </div>
+    </th:block>
+</div>
+
+<!--引入js代码块-->
+<script src="/layui/layui.js"></script>
+
+<script>
+</script>
+
+</body>
+</html>
