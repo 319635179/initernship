@@ -18,4 +18,8 @@ public class Useranswer {
     private String tel;
     private String answer;
     private Date time;
+    private Integer redNum;
+    private Integer blueNum;
+    private Integer yellowNum;
+    private Integer greenNum;
 }

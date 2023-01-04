@@ -32,8 +32,36 @@ public class UseranswerServiceImpl implements UseranswerService {
             map.put("error_message", "提交失败");
             return map;
         }
-        System.out.println(username + ' ' + tel + ' ' + answer);
-        useranswerMapper.insert(new Useranswer(null, username, tel, answer, new Date()));
+        int red = 0, blue = 0, yellow = 0, green = 0;
+        for(int i  = 0; i < 15; i++){
+            if(answer.charAt(i) == 'A'){
+                red++;
+            }else if(answer.charAt(i) == 'B'){
+                blue++;
+            }else if(answer.charAt(i) == 'C'){
+                yellow++;
+            }else if(answer.charAt(i) == 'D'){
+                green++;
+            }else{
+                map.put("error_message", "未全部完成");
+                return map;
+            }
+        }
+        for(int i  = 15; i < 30; i++){
+            if(answer.charAt(i) == 'D'){
+                red++;
+            }else if(answer.charAt(i) == 'C'){
+                blue++;
+            }else if(answer.charAt(i) == 'B'){
+                yellow++;
+            }else if(answer.charAt(i) == 'A'){
+                green++;
+            }else{
+                map.put("error_message", "未全部完成");
+                return map;
+            }
+        }
+        useranswerMapper.insert(new Useranswer(null, username, tel, answer, new Date(), red, blue, yellow, green));
         map.put("error_message", "success");
         return map;
     }

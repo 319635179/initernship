@@ -1,7 +1,12 @@
 <template>
     <div class="home">
         <div class="home-view-top">
-            <div class="home-view-top-title">FPA性格测试</div>
+            <div class="home-view-top-title">
+                <div style="font-size: 40px; width: 100%; display: flex; justify-content: center; font-weight: 800;">
+                    FPA性格测试</div>
+                <div style="color: gray; font-weight: 600; font-size: 14px;">完成测试，获得专业报告</div>
+            </div>
+
             <div class="home-view-top-user">
                 <div style="width: 33%; display: flex; align-items: center; justify-content: center;">
                     名字：{{ $store.state.user.username }}
@@ -48,7 +53,7 @@
                 <div v-for="(q, i) in questions" :key="q.id"
                     :style="{ backgroundColor: $store.state.user.answer[i] === -1 ? 'skyblue' : 'coral' }" class="Aitem"
                     @click="changeNowQuestion(i)">
-                    {{ i }}
+                    {{ i + 1 }}
                 </div>
             </div>
         </div>
@@ -109,6 +114,7 @@ export default {
             backgroundColor: 'deepskyblue',
             borderRadius: '8px',
             transition: '100ms',
+            padding: '0 10px',
         })
 
         const selectItem = num => {
@@ -126,6 +132,8 @@ export default {
                 i: nowQuestion.value,
                 answer,
             })
+            if (nowQuestion.value !== 29)
+                changeNowQuestion(nowQuestion.value + 1);
         }
 
         const logout = () => {
@@ -138,13 +146,6 @@ export default {
         }
 
         const changeNowQuestion = num => {
-            // if (answer != -1) {
-            //     store.commit('updateAnswer', {
-            //         mes: 'change',
-            //         i: nowQuestion.value,
-            //         answer,
-            //     })
-            // }
             nowQuestion.value = num;
             answer = store.state.user.answer[num];
             for (let i = 0; i < 4; i++) {
@@ -175,7 +176,7 @@ export default {
                     answer: submitAns
                 },
                 success: resp => {
-                    console.log(resp);
+                    if (resp.error_message === 'success') router.push({ name: 'result' });
                 }
 
             })
@@ -217,11 +218,13 @@ export default {
 .home-view-top-title {
     width: 100%;
     height: 80px;
-    font-size: 40px;
-    font-weight: 800;
+    /* font-size: 40px; */
+    /* font-weight: 800; */
     display: flex;
     justify-content: center;
     align-items: center;
+    flex-wrap: wrap;
+    flex-shrink: 0;
     transform: translateY(-50px);
 }
 
@@ -258,8 +261,8 @@ export default {
 
 .progress {
     height: 16px;
-    width: 798px;
-    transform: translateX(-19px) translateY(1px);
+    width: 100%;
+    transform: translateY(10px);
     border-radius: 8px;
     background-color: aliceblue;
 }
