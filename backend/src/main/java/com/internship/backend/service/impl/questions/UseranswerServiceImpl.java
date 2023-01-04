@@ -1,5 +1,6 @@
 package com.internship.backend.service.impl.questions;
 
+import com.baomidou.mybatisplus.core.conditions.query.QueryWrapper;
 import com.internship.backend.mapper.UseranswerMapper;
 import com.internship.backend.pojo.Useranswer;
 import com.internship.backend.service.questions.UseranswerService;
@@ -19,7 +20,9 @@ public class UseranswerServiceImpl implements UseranswerService {
 
     @Override
     public List<Useranswer> getUseranswer() {
-        return null;
+        QueryWrapper<Useranswer> queryWrapper = new QueryWrapper<>();
+        queryWrapper.select("*");
+        return useranswerMapper.selectList(queryWrapper);
     }
 
     @Override

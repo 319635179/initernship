@@ -1,7 +1,9 @@
 package com.internship.backend.controller.questions;
 
 import com.internship.backend.pojo.Questions;
+import com.internship.backend.pojo.Useranswer;
 import com.internship.backend.pojo.table.QuestionsResult;
+import com.internship.backend.pojo.table.UseranswerResult;
 import com.internship.backend.service.questions.QuestionsService;
 import com.internship.backend.service.questions.UseranswerService;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -24,6 +26,12 @@ public class QuestionsController {
     public QuestionsResult getQuestions(){
         List<Questions> list = questionsService.getQuestions();
         return new QuestionsResult(0, list.size(), list);
+    }
+
+    @GetMapping("/questions/query/answer")
+    public UseranswerResult getUseranswer(){
+        List<Useranswer> list = useranswerService.getUseranswer();
+        return new UseranswerResult(0, list.size(), list);
     }
 
     @PostMapping("/questions/answer/add")

@@ -202,12 +202,13 @@ export default {
     width: 100vw;
     min-width: 1000px;
     height: 100vh;
+    min-height: 900px;
 }
 
 .home-view-top {
     width: 100%;
     height: 37%;
-    background-color: aquamarine;
+    background-color: goldenrod;
     display: flex;
     justify-content: center;
     align-items: center;
@@ -320,7 +321,7 @@ export default {
     flex-shrink: 0;
     justify-content: space-around;
     position: absolute;
-    left: 100px;
+    left: 20px;
     transform: translateY(20px);
 }
 

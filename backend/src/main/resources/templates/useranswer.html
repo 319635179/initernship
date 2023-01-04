@@ -1,0 +1,112 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Title1</title>
+    <link rel="stylesheet" href="/layui/css/layui.css" media="all">
+    <style>
+        .useranswerform{
+            width: 300px;
+        }
+
+        .search{
+            width: 350px;
+            display: flex;
+            align-content: center;
+            justify-content: center;
+        }
+
+        .sss{
+            width: 200px;
+        }
+
+        .layui-btn-container{
+            display: flex;
+            align-content: center;
+        }
+    </style>
+</head>
+<body>
+<form class="layui-form" id="search" lay-filter="search">
+    <div class="layui-inline">
+        <div class="layui-input-inline">
+            <input type="text" name="searchName" id="searchName" placeholder="请输入关键字" autocomplete="off" class="layui-input">
+        </div>
+    </div>
+    <div class="layui-inline">
+        <div class="layui-input-inline" style="width: 100px;">
+            <button type="button" class="layui-btn" lay-submit="" lay-filter="search">搜索</button>
+        </div>
+    </div>
+</form>
+<table class="layui-hide" id="useranswer" lay-filter="useranswer"></table>
+
+<script src="/layui/layui.js"></script>
+<script>
+    layui.use(['form', 'layedit', 'laydate', 'table'], function () {
+        var table = layui.table, form = layui.form, laydate = layui.laydate;
+        var $ = layui.$;
+        let roleName = [];
+        laydate.render({
+            elem: '#date'
+        });
+        $.ajax({
+            url: '/questions/query/answer',
+            type: 'get',
+            success: (resp) =>{
+                for(let i of resp.data){
+                    roleName[i.id] = i.roleName
+                }
+            }
+        })
+        let deptName = [];
+        $.ajax({
+            url: '/get/getdept?limit=999&page=1',
+            type: 'get',
+            success: (resp) =>{
+                for(let i of resp.data){
+                    deptName[i.id] = i.deptName
+                }
+            }
+        })
+        table.render({
+            elem: '#useranswer'
+            , url: '/questions/query/answer'
+            , toolbar: '#toolbarDemo' //开启头部工具栏，并为其绑定左侧模板
+            , defaultToolbar: ['filter', 'exports', 'print', { //自定义头部工具栏右侧图标。如无需自定义，去除该参数即可
+                title: '提示'
+                , layEvent: 'LAYTABLE_TIPS'
+                , icon: 'layui-icon-tips'
+            }]
+            , cols: [
+                [
+                    {field: 'id', width: 80, title: 'ID', sort: true}
+                    , {field: 'username', width: 120, title: '名字'}
+                    , {field: 'tel', width: 140, title: '联系方式'}
+                    , {field: 'answer', width: 400, title: '答案'}
+                    , {field: 'time', width: 300, title: '测试时间'}
+                    , {field: 'redNum', width: 120, title: '红色性格'}
+                    , {field: 'blueNum', width: 120, title: '蓝色性格'}
+                    , {field: 'yellowNum', width: 120, title: '黄色性格'}
+                    , {field: 'greenNum', width: 120, title: '绿色性格'}
+                ]
+            ]
+            , page: true
+            , limit: 3
+            , limits: [3, 5, 10]
+        });
+
+        form.on("submit(search)", function (obj) {
+            table.reload("useranswer", {
+                where: {
+                    searchName: obj.field.searchName
+                },
+                page: {
+                    curr: 1
+                }
+            })
+        })
+    });
+</script>
+</body>
+</html>

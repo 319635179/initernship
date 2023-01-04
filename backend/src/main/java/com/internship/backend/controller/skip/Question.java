@@ -21,4 +21,9 @@ public class Question {
         model.addAttribute("questionList",questionList);
         return "questions";
     }
+
+    @RequestMapping("/useranswer")
+    public String useranswer(){
+        return "useranswer";
+    }
 }
