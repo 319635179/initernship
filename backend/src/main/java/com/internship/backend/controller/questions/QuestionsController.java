@@ -12,6 +12,7 @@ import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.RestController;
 
+import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 
@@ -37,5 +38,23 @@ public class QuestionsController {
     @PostMapping("/questions/answer/add")
     public Map<String, String> addUseranswer(@RequestParam Map<String, String> data){
         return useranswerService.addUseranswer(data);
+    }
+
+    @PostMapping("/questions/answer/getbyid")
+    public Map<String, String> getUseranswerById(@RequestParam String username, @RequestParam String tel){
+        Useranswer useranswer = useranswerService.getAnswerById(username, tel);
+        Map<String, String> map = new HashMap<>();
+        if(useranswer==null){
+            map.put("error_message", "null");
+        }else{
+            map.put("error_message", "success");
+            map.put("data", useranswer.toString());
+        }
+        return map;
+    }
+
+    @PostMapping("/questions/answer/delete")
+    public Map<String, String> deleteUseranswer(@RequestParam String username, @RequestParam String tel){
+        return useranswerService.deletAnswer(username, tel);
     }
 }

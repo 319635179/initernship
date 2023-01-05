@@ -5,6 +5,7 @@ export default {
     answer: [],
     is_login: false,
     is_updating: true,
+    color: [0,0,0,0]
   },
   getters: {
   },
@@ -23,11 +24,26 @@ export default {
     },
     updateAnswer(state, data){
         if(data.mes === 'change'){
+            if(data.i < 15){
+                if(data.answer[data.i]!==-1)state.color[state.answer[data.i]]--;
+            }else{
+                if(data.answer[data.i]!==-1)state.color[3 - state.answer[data.i]]--;
+            }
             state.answer[data.i] = data.answer;
+            if(data.i < 15)
+                state.color[state.answer[data.i]]++;
+            else
+                state.color[3 - state.answer[data.i]]++;
         }else{
             state.answer = [];
             for(let i = 0; i < 30; i++) state.answer.push(-1);
         }
+    },
+    updateColor(state, data){
+        state.color[0] = data.red;
+        state.color[1] = data.blue;
+        state.color[2] = data.yellow;
+        state.color[3] = data.green;
     },
     updateUp(state, data){
         state.is_updating = data;

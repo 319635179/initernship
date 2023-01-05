@@ -64,7 +64,30 @@ public class UseranswerServiceImpl implements UseranswerService {
                 return map;
             }
         }
-        useranswerMapper.insert(new Useranswer(null, username, tel, answer, new Date(), red, blue, yellow, green));
+        Date date = new Date();
+        useranswerMapper.insert(new Useranswer(null, username, tel, answer, date, red, blue, yellow, green));
+        map.put("error_message", "success");
+        return map;
+    }
+
+    @Override
+    public Useranswer getAnswerById(String username, String tel) {
+        QueryWrapper<Useranswer> queryWrapper = new QueryWrapper<>();
+        queryWrapper.eq("username", username).eq("tel", tel);
+        return useranswerMapper.selectOne(queryWrapper);
+    }
+
+    @Override
+    public Map<String, String> deletAnswer(String username, String tel) {
+        QueryWrapper<Useranswer> queryWrapper = new QueryWrapper<>();
+        queryWrapper.eq("username", username).eq("tel", tel);
+        Useranswer useranswer = useranswerMapper.selectOne(queryWrapper);
+        Map<String, String> map = new HashMap<>();
+        if(useranswer == null){
+            map.put("error_message", "查询不到此测试");
+            return map;
+        }
+        useranswerMapper.deleteById(useranswer);
         map.put("error_message", "success");
         return map;
     }

@@ -86,6 +86,27 @@ export default {
         }])
 
         $.ajax({
+            url: 'http://localhost:3000/questions/answer/getbyid',
+            type: 'post',
+            data: {
+                username: store.state.user.username,
+                tel: store.state.user.tel,
+            },
+            success: resp => {
+                if (resp.error_message === 'success') {
+                    let userMes = resp.data.split('(')[1].split(', ');
+                    store.commit('updateColor', {
+                        red: parseInt(userMes[5].split('=')[1]),
+                        blue: parseInt(userMes[6].split('=')[1]),
+                        yellow: parseInt(userMes[7].split('=')[1]),
+                        green: parseInt(userMes[8].split('=')[1]),
+                    })
+                    router.push({ name: 'result' });
+                }
+            }
+        })
+
+        $.ajax({
             url: 'http://localhost:3000/questions/query',
             type: 'get',
             success: resp => {
@@ -167,6 +188,10 @@ export default {
                     if (store.state.user.answer[i] === 3) submitAns += 'D';
                 }
             }
+            // let answerResult = localStorage.getItem("answerResult");
+            // if (answerResult !== null)
+            //     localStorage.removeItem('answerResult');
+            // localStorage.setItem(store.state.user.username + '-' + store.state.user.tel);
             $.ajax({
                 url: 'http://localhost:3000/questions/answer/add',
                 type: 'post',
