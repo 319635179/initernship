@@ -1,5 +1,5 @@
 <template>
-    <div class="home">
+    <div class="home" v-if="!$store.state.user.is_searching">
         <div class="home-view-top">
             <div class="home-view-top-title">
                 <div style="font-size: 40px; width: 100%; display: flex; justify-content: center; font-weight: 800;">
@@ -103,6 +103,7 @@ export default {
                     })
                     router.push({ name: 'result' });
                 }
+                store.commit('updateIsSearch', false);
             }
         })
 
@@ -188,10 +189,11 @@ export default {
                     if (store.state.user.answer[i] === 3) submitAns += 'D';
                 }
             }
-            // let answerResult = localStorage.getItem("answerResult");
-            // if (answerResult !== null)
-            //     localStorage.removeItem('answerResult');
-            // localStorage.setItem(store.state.user.username + '-' + store.state.user.tel);
+            let answerResult = localStorage.getItem("answerResult");
+            if (answerResult === null)
+                localStorage.setItem('answerResult', store.state.user.username + '-' + store.state.user.tel);
+            else
+                localStorage.setItem('answerResult', answerResult + ',' + store.state.user.username + '-' + store.state.user.tel);
             $.ajax({
                 url: 'http://localhost:3000/questions/answer/add',
                 type: 'post',

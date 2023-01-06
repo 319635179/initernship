@@ -5,6 +5,7 @@ export default {
     answer: [],
     is_login: false,
     is_updating: true,
+    is_searching: true,
     color: [0,0,0,0]
   },
   getters: {
@@ -21,6 +22,7 @@ export default {
         }else{
             localStorage.removeItem("userMes");
         }
+        state.color = [0, 0, 0, 0]
     },
     updateAnswer(state, data){
         if(data.mes === 'change'){
@@ -47,6 +49,9 @@ export default {
     },
     updateUp(state, data){
         state.is_updating = data;
+    },
+    updateIsSearch(state, data){
+        state.is_searching = data;
     }
   },
   actions: {

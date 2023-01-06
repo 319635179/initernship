@@ -2,6 +2,7 @@ import { createRouter, createWebHistory } from 'vue-router';
 import LoginView from '@/views/login.vue';
 import HomeView from '@/views/home.vue';
 import ResultView from '@/views/result.vue';
+import HistoryView from '@/views/history.vue';
 import store from '@/store';
 
 const routes = [
@@ -29,6 +30,13 @@ const routes = [
     component: ResultView,
     meta: {
       isAuth: true,
+    }
+  },{
+    path: '/history',
+    name: 'history',
+    component: HistoryView,
+    meta: {
+      isAuth: false,
     }
   }
 ]

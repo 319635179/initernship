@@ -17,13 +17,17 @@
         <div style="width: 100%; display: flex; justify-content: center; height: 80px;">
             <div style="width: 800px; display: flex; align-items: center; justify-content: space-around;">
                 <button @click="nowWant = 0"
-                    style="border: 0; width: 100px; height: 60%; background-color: crimson; border-radius: 5px; ">红色性格</button>
+                    style="border: 0; width: 100px; height: 60%; background-color: crimson; border-radius: 5px; "
+                    v-if="color_is[0]">红色性格</button>
                 <button @click="nowWant = 1"
-                    style="border: 0; width: 100px; height: 60%; background-color: skyblue; border-radius: 5px; ">蓝色性格</button>
+                    style="border: 0; width: 100px; height: 60%; background-color: skyblue; border-radius: 5px; "
+                    v-if="color_is[1]">蓝色性格</button>
                 <button @click="nowWant = 2"
-                    style="border: 0; width: 100px; height: 60%; background-color: yellow; border-radius: 5px; ">黄色性格</button>
+                    style="border: 0; width: 100px; height: 60%; background-color: yellow; border-radius: 5px; "
+                    v-if="color_is[2]">黄色性格</button>
                 <button @click="nowWant = 3"
-                    style="border: 0; width: 100px; height: 60%; background-color: greenyellow; border-radius: 5px; ">绿色性格</button>
+                    style="border: 0; width: 100px; height: 60%; background-color: greenyellow; border-radius: 5px; "
+                    v-if="color_is[3]">绿色性格</button>
             </div>
         </div>
         <RedCom v-if="nowWant === 0" />
@@ -93,7 +97,18 @@ export default {
             ]
         })
 
-        const nowWant = ref(0);
+        let nowWant = ref(0);
+        let color_is = ref([false, false, false, false]);
+        let maxn = 0;
+        for (let i = 0; i < 4; i++)
+            if (store.state.user.color[i] > maxn) maxn = store.state.user.color[i];
+
+        for (let i = 0; i < 4; i++) {
+            if (store.state.user.color[i] === maxn) {
+                color_is.value[i] = true;
+                nowWant.value = i;
+            }
+        }
 
         const intiDom = () => {
             let chartDom = document.getElementById('pie');
@@ -132,7 +147,8 @@ export default {
         return {
             again,
             logout,
-            nowWant
+            nowWant,
+            color_is
         }
     }
 }

@@ -10,8 +10,9 @@
                 <label for="tel">电话</label>
                 <input type="text" placeholder="请输入电话" id="tel" name="tel" v-model="tel">
             </div>
-            <div>
+            <div style="height: 120px;">
                 <button type="button" @click="login">去评测</button>
+                <button type="button" @click="getHistoryLogin">查看历史评测</button>
             </div>
         </div>
     </div>
@@ -53,10 +54,15 @@ export default {
                 window.alert("用户名或电话不能为空");
             }
         }
+
+        const getHistoryLogin = () => {
+            router.push({ name: 'history' });
+        }
         return {
             username,
             tel,
-            login
+            login,
+            getHistoryLogin
         }
     }
 }
@@ -71,6 +77,7 @@ export default {
     display: flex;
     justify-content: center;
     align-items: center;
+    background: linear-gradient(to bottom right, rgb(253, 185, 129), rgb(179, 107, 0));
 }
 
 .login-card {
