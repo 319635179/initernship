@@ -2,6 +2,7 @@ package com.internship.backend.controller.skip;
 
 import com.internship.backend.pojo.Questions;
 import com.internship.backend.service.questions.QuestionsService;
+import com.internship.backend.service.questions.UseranswerService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
@@ -14,6 +15,8 @@ import java.util.List;
 public class Question {
     @Autowired
     private QuestionsService questionsService;
+    @Autowired
+    private UseranswerService useranswerService;
     @RequestMapping("/list")
     public String list(Model model){
         List<Questions> questionList = questionsService.getQuestions();
@@ -23,7 +26,7 @@ public class Question {
     }
 
     @RequestMapping("/useranswer")
-    public String useranswer(){
+    public String useranswer(Model model){
         return "useranswer";
     }
 }
